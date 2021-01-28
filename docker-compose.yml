@@ -11,15 +11,15 @@ services:
     volumes:
       - webappdata:/code/
       - ./log:/var/log/nginx/
-      - ./nginx/my_nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./my_nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - web
     command: ["nginx", "-g", "daemon off;"]
     networks:
       - mail-app
 
-    web:
-    image: 18.191.44.59:5000/web:${web_repo_tag}
+  web:
+    build: ./Mail-App
     command: uwsgi --ini ./Djangoapp/uwsgi.ini
     volumes:
       - ./Django-app:/code
