@@ -20,7 +20,6 @@ services:
 
   web:
     build: ./Mail-App
-    command: uwsgi --ini ./Djangoapp/uwsgi.ini
     volumes:
       - ./Django-app:/code
     ports:

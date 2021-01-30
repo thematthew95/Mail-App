@@ -1,9 +1,10 @@
 import email
 import imaplib
 import os
+from decouple import config
 
-username = 'jankowalski798466@gmail.com'
-password = 'Python123'
+username = config('GMAIL_LOGIN')
+password = config('GMAIL_PASSWORD')
 
 mail = imaplib.IMAP4_SSL("imap.gmail.com")
 mail.login(username, password)
