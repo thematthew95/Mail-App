@@ -2,38 +2,23 @@ version: "3"
 
 services:
 
-  nginx:
-    image: nginx:1.19.3
+  web:
+    build: .
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - webappdata:/code/
       - ./log:/var/log/nginx/
       - ./my_nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - web
     command: ["nginx", "-g", "daemon off;"]
     networks:
       - mail-app
 
-  web:
-    build: ./Mail-App
-    volumes:
-      - ./Django-app:/code
-    ports:
-      - "8000:8000"
-    networks:
-      - mail-app
-
 networks:
-  djangoapp:
+  mail-app:
     driver: bridge
     ipam:
       driver: default
       config:
         - subnet: 172.16.243.0/24
-
-volumes:
-  webappdata:
