@@ -6,4 +6,3 @@ RUN mkdir /code && \
 	apt -y install nginx
 WORKDIR /code
 COPY . /code/
-ENTRYPOINT ["python3", "mail-app.py"]
